@@ -37,3 +37,15 @@ function playRound(playerSelection, computerSelection) {
 
   return 'Draw';
 }
+
+const ROUNDS = 5;
+
+function game() {
+  for (let i = 0; i < ROUNDS; i++) {
+    const playerSelection = prompt("Your choice: 'rock', 'paper' or 'scissors'");
+    console.log(`Round ${i + 1}: ` + playRound(playerSelection, computerPlay()));
+  }
+  console.log('Thank you for playing!');
+}
+
+game();
