@@ -1,7 +1,8 @@
+const CHOICES = ['Rock', 'Paper', 'Scissors'];
+
 function computerPlay() {
-  const choices = ['Rock', 'Paper', 'Scissors'];
-  const index = Math.floor(Math.random() * Math.floor(choices.length));
-  return choices[index];
+  const index = Math.floor(Math.random() * Math.floor(CHOICES.length));
+  return CHOICES[index];
 }
 
 function capitalize(str) {
@@ -10,6 +11,9 @@ function capitalize(str) {
 
 function playRound(playerSelection, computerSelection) {
   playerSelection = capitalize(playerSelection);
+  if (!CHOICES.includes(playerSelection)) {
+    return null;
+  }
 
   if (playerSelection === 'Rock') {
     if (computerSelection === 'Paper') {
@@ -44,18 +48,22 @@ function game() {
   let playerScores = 0;
   let computerScores = 0;
 
-  for (let i = 0; i < ROUNDS; i++) {
+  let round = 0;
+  while (round < ROUNDS) {
     const playerSelection = prompt("Your choice: 'rock', 'paper' or 'scissors'");
     const result = playRound(playerSelection, computerPlay());
 
-    if (result.includes('win')) {
-      playerScores++;
-    } else if (result.includes('lose')){
-      computerScores++;
+    if (result) {
+      if (result.includes('win')) {
+        playerScores++;
+      } else if (result.includes('lose')){
+        computerScores++;
+      }
+  
+      console.log(`Round ${round + 1}: ` + result);
+      console.log(`${playerScores} - ${computerScores}`);
+      round++;
     }
-
-    console.log(`Round ${i + 1}: ` + result);
-    console.log(`${playerScores} - ${computerScores}`);
   }
 
   if (playerScores > computerScores) {
