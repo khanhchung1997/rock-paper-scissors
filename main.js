@@ -41,10 +41,31 @@ function playRound(playerSelection, computerSelection) {
 const ROUNDS = 5;
 
 function game() {
+  let playerScores = 0;
+  let computerScores = 0;
+
   for (let i = 0; i < ROUNDS; i++) {
     const playerSelection = prompt("Your choice: 'rock', 'paper' or 'scissors'");
-    console.log(`Round ${i + 1}: ` + playRound(playerSelection, computerPlay()));
+    const result = playRound(playerSelection, computerPlay());
+
+    if (result.includes('win')) {
+      playerScores++;
+    } else if (result.includes('lose')){
+      computerScores++;
+    }
+
+    console.log(`Round ${i + 1}: ` + result);
+    console.log(`${playerScores} - ${computerScores}`);
   }
+
+  if (playerScores > computerScores) {
+    console.log('You beat computer!');
+  } else if (playerScores < computerScores) {
+    console.log('You lose computer!');
+  } else {
+    console.log('No winner');
+  }
+
   console.log('Thank you for playing!');
 }
 
